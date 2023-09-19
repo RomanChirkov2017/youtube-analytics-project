@@ -24,6 +24,30 @@ class Channel:
         self.video_count = self.channel['items'][0]['statistics']['videoCount']
         self.total_views = self.channel['items'][0]['statistics']['viewCount']
 
+    def __str__(self):
+        return f'{self.title}({self.url})'
+
+    def __add__(self, other):
+        return int(self.number_of_subscribers) + int(other.number_of_subscribers)
+
+    def __sub__(self, other):
+        return int(self.number_of_subscribers) - int(other.number_of_subscribers)
+
+    def __lt__(self, other):
+        return self.number_of_subscribers < other.number_of_subscribers
+
+    def __le__(self, other):
+        return self.number_of_subscribers <= other.number_of_subscribers
+
+    def __gt__(self, other):
+        return self.number_of_subscribers > other.number_of_subscribers
+
+    def __ge__(self, other):
+        return self.number_of_subscribers >= other.number_of_subscribers
+
+    def __eq__(self, other):
+        return self.number_of_subscribers == other.number_of_subscribers
+
     @classmethod
     def get_service(cls):
         return build('youtube', 'v3', developerKey=cls.api_key)
