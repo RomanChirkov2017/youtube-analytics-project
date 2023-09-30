@@ -8,7 +8,7 @@ class Channel:
     api_key: str = os.getenv('YOUTUBE_API_KEY')
 
 
-    def __init__(self, channel_id: str):
+    def __init__(self, channel_id):
         """Экземпляр инициализируется id канала. Дальше все данные будут подтягиваться по API."""
         self.channel_id = channel_id
         self.channel = Channel.get_service().channels().list(
@@ -51,6 +51,8 @@ class Channel:
     @classmethod
     def get_service(cls):
         return build('youtube', 'v3', developerKey=cls.api_key)
+
+
 
     def to_json(self, path):
         my_data = {
